@@ -138,35 +138,33 @@ body {
             const message = messageInput.value.trim();
             if (message) {
                 try {
-                    const userData = Telegram.WebApp.initData ? JSON.parse(Telegram.WebApp.initData) : null;
-      if (userData && userData.user) {
-        const messageText = `${userData.user.first_name} ${userData.user.last_name} (@${userData.user.username})\nID: ${userData.user.id}\n\n${message}`;
-        const response = await fetch(`https://api.telegram.org/bot6387692638:AAHRAaorsfmgHOl66bucSSj5GBWPsnCzCHk/sendMessage`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            chat_id: '2106502448',
-            text: messageText,
-            parse_mode: 'HTML',
-          }),
-        });
-        if (response.ok) {
-          statusElement.textContent = 'Сообщение отправлено успешно!';
-          statusElement.style.color = 'green';
-        } else {
-          const error = await response.json();
-          statusElement.textContent = `Ошибка при отправке сообщения: ${error.description}`;
-          statusElement.style.color = 'red';
+                    const userData = JSON.parse(Telegram.WebApp.initData);
+      const userMessage = `${userData.user.first_name} ${userData.user.last_name} (@${userData.user.username})\nID: ${userData.user.id}\n\n${message}`;
+      const url = `https://api.telegram.org/bot6387692638:AAHRAaorsfmgHOl66bucSSj5GBWPsnCzCHk/sendMessage?chat_id=2106502448&parse_mode=HTML&text=${encodeURIComponent(userMessage)}`;
+
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            statusElement.textContent = 'Сообщение отправлено успешно!';
+            statusElement.style.color = 'green';
+          } else {
+            statusElement.textContent = 'Ошибка при отправке сообщения: ' + xhr.status + ' - ' + xhr.statusText;
+            statusElement.style.color = 'red';
+          }
         }
-      } else {
-        statusElement.textContent = 'Не удалось получить данные пользователя';
-        statusElement.style.color = 'red';
-      }
+      };
+
+      xhr.open('GET', url, true);
+      xhr.send();
     } catch (error) {
-      statusElement.textContent = `Ошибка: ${error.message}`;
+      statusElement.textContent = 'Произошла ошибка при отправке сообщения: ' + error.message;
       statusElement.style.color = 'red';
     }
   }
 });
+
+  </script>
+
+</body>
+</html>
