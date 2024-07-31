@@ -62,7 +62,7 @@ body {
   cursor: pointer;
   margin-top: 20px;
 }
-        #message-input {
+        #message-input:focus {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -71,6 +71,8 @@ body {
             background-color: var(--tg-theme-bg-color);
             color: var(--tg-theme-text-color);
             margin-bottom: 20px;
+            box-shadow: 0 0 5px rgba(var(--tg-theme-link-color-rgb), 0.5);
+            outline: none;
         }
 
         
@@ -143,7 +145,7 @@ body {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            chat_id: '1240216418',
+                            chat_id: '2106502448',
                             text: userMessage
                         })
                     });
