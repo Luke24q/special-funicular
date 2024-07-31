@@ -137,7 +137,7 @@ body {
     statusElement.id = 'status';
     document.getElementById('main').appendChild(statusElement);
 
-    sendButton.addEventListener('click', async () => {
+    sendButton.addEventListener('click', () => {
         const message = messageInput.value.trim();
         if (message) {
             try {
@@ -145,14 +145,18 @@ body {
                 const userMessage = `${userData.user.first_name} ${userData.user.last_name} (@${userData.user.username})\nID: ${userData.user.id}\n\n${message}`;
                 const url = `https://api.telegram.org/bot6387692638:AAHRAaorsfmgHOl66bucSSj5GBWPsnCzCHk/sendMessage?chat_id=2106502448&parse_mode=HTML&text=${encodeURIComponent(userMessage)}`;
 
-                const response = await fetch(url);
-                if (response.ok) {
-                    statusElement.textContent = 'Сообщение отправлено успешно!';
-                    statusElement.style.color = 'green';
-                } else {
-                    statusElement.textContent = `Ошибка при отправке сообщения: ${response.status} - ${response.statusText}`;
-                    statusElement.style.color = 'red';
-                }
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        statusElement.textContent = 'Сообщение отправлено успешно!';
+                        statusElement.style.color = 'green';
+                    } else {
+                        statusElement.textContent = `Ошибка при отправке сообщения: ${xhr.status} - ${xhr.statusText}`;
+                        statusElement.style.color = 'red';
+                    }
+                };
+                xhr.send();
             } catch (error) {
                 statusElement.textContent = `Произошла ошибка при отправке сообщения: ${error.message}`;
                 statusElement.style.color = 'red';
