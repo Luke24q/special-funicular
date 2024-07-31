@@ -114,6 +114,30 @@ body {
             background-color: var(--tg-theme-accent-text-color);
         }
 
+
+
+
+
+        .input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .success-message {
+        text-align: center;
+        color: green;
+    }
+
+    .success-message.visible {
+        opacity: 1;
+    }
+
+
+
+
+
+
         button:active {
             background-color: var(--tg-theme-button-color);
         }       }
@@ -123,9 +147,11 @@ body {
     <div id="main">
     <h1>Выборы президента Авинесии 2024</h1>
     <p>Предложите любого кандидата из граждан</p>
-    <input type="text" id="message-input" placeholder="Ник кандидата" style="width: 100%;">
-    <button id="send-button" style="width: 100%;">Отправить</button>
-    <p id="status-message" style="text-align: center; color: green;"></p>
+    <div class="input-container">
+        <input type="text" id="message-input" placeholder="Ник кандидата" style="width: 100%;">
+        <button id="send-button" style="width: 100%;">Отправить</button>
+    </div>
+    <p id="status-message" class="success-message">Сообщение отправлено успешно!</p>
 </div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
@@ -148,7 +174,7 @@ body {
                 const data = await response.text(); // получаем ответ в виде текста, а не как JSON
 
                 if (response.ok) {
-                    statusElement.textContent = 'Сообщение отправлено успешно!';
+                    statusElement.classList.add('visible');
                     disableInputAndButton();
                 } else {
                     statusElement.textContent = `Ошибка при отправке сообщения: ${data}`;
@@ -165,6 +191,18 @@ body {
         messageInput.disabled = true;
         sendButton.style.display = 'none';
     }
+
+    // Стили
+    const inputContainer = document.querySelector('.input-container');
+    inputContainer.style.marginBottom = '16px';
+
+    const successMessage = document.querySelector('.success-message');
+    successMessage.style.fontWeight = 'bold';
+    successMessage.style.marginTop = '16px';
+    successMessage.style.opacity = '0';
+    successMessage.style.transition = 'opacity 0.5s ease-in-out';
+
+    successMessage.classList.add('visible');
 </script>
 </body>
 </html>
