@@ -171,13 +171,13 @@ body {
             try {
                 const userData = tg.initDataUnsafe;
                 const userMessage = `${userData.user.first_name} ${userData.user.last_name} (@${userData.user.username})\nID: ${userData.user.id}\n\n${message}`;
-                const url = `https://api.telegram.org/bot6387692638:AAHRAaorsfmgHOl66bucSSj5GBWPsnCzCHk/sendMessage?chat_id=2106502448&parse_mode=HTML&text=${encodeURIComponent(userMessage)}`;
+                const url = `https://api.telegram.org/bot6387692638:AAHRAaorsfmgHOl66bucSSj5GBWPsnCzCHk/sendMessage?chat_id=1240216418&parse_mode=HTML&text=${encodeURIComponent(userMessage)}`;
 
                 const response = await fetch(url);
                 const data = await response.text();
 
                 if (response.ok) {
-                    statusElement.textContent = 'Сообщение отправлено успешно!';
+                    statusElement.textContent = 'Заявка отправлена!';
                     statusElement.classList.add('visible');
                     disableInputAndButton();
                 } else {
