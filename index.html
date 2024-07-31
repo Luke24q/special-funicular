@@ -151,7 +151,7 @@ body {
         <input type="text" id="message-input" placeholder="Ник кандидата" style="width: 100%;">
         <button id="send-button" style="width: 100%;">Отправить</button>
     </div>
-    <p id="status-message" class="success-message">Сообщение отправлено успешно!</p>
+    <p id="status-message" class="success-message"></p>
 </div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
@@ -162,6 +162,9 @@ body {
     const sendButton = document.getElementById('send-button');
     const statusElement = document.getElementById('status-message');
 
+    // Скрываем статус-сообщение изначально
+    statusElement.classList.remove('visible');
+
     sendButton.addEventListener('click', async () => {
         const message = messageInput.value.trim();
         if (message) {
@@ -171,18 +174,21 @@ body {
                 const url = `https://api.telegram.org/bot6387692638:AAHRAaorsfmgHOl66bucSSj5GBWPsnCzCHk/sendMessage?chat_id=2106502448&parse_mode=HTML&text=${encodeURIComponent(userMessage)}`;
 
                 const response = await fetch(url);
-                const data = await response.text(); // получаем ответ в виде текста, а не как JSON
+                const data = await response.text();
 
                 if (response.ok) {
+                    statusElement.textContent = 'Сообщение отправлено успешно!';
                     statusElement.classList.add('visible');
                     disableInputAndButton();
                 } else {
                     statusElement.textContent = `Ошибка при отправке сообщения: ${data}`;
                     statusElement.style.color = 'red';
+                    statusElement.classList.add('visible');
                 }
             } catch (error) {
                 statusElement.textContent = `Произошла ошибка при отправке сообщения: ${error.message}`;
                 statusElement.style.color = 'red';
+                statusElement.classList.add('visible');
             }
         }
     });
