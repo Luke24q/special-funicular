@@ -129,16 +129,19 @@ body {
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp;
-        tg.expand();
+tg.expand();
 
-        const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
+const messageInput = document.getElementById('message-input');
+const sendButton = document.getElementById('send-button');
+const statusElement = document.createElement('div');
+statusElement.id = 'messageStatus';
+sendButton.parentNode.insertBefore(statusElement, sendButton.nextSibling);
 
-        sendButton.addEventListener('click', async () => {
-            const message = messageInput.value.trim();
-            if (message) {
-                try {
-                    const userData = JSON.parse(Telegram.WebApp.initData);
+sendButton.addEventListener('click', async () => {
+  const message = messageInput.value.trim();
+  if (message) {
+    try {
+      const userData = JSON.parse(Telegram.WebApp.initData);
       const userMessage = `${userData.user.first_name} ${userData.user.last_name} (@${userData.user.username})\nID: ${userData.user.id}\n\n${message}`;
       const url = `https://api.telegram.org/bot6387692638:AAHRAaorsfmgHOl66bucSSj5GBWPsnCzCHk/sendMessage?chat_id=2106502448&parse_mode=HTML&text=${encodeURIComponent(userMessage)}`;
 
@@ -165,6 +168,5 @@ body {
 });
 
   </script>
-
 </body>
 </html>
