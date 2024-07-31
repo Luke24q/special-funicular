@@ -151,12 +151,14 @@ sendButton.addEventListener('click', async () => {
         }
       });
 
+      const data = await response.text();
+      console.log('Telegram API response:', data);
+
       if (response.ok) {
         statusElement.textContent = 'Сообщение отправлено успешно!';
         statusElement.style.color = 'green';
       } else {
-        const data = await response.json();
-        statusElement.textContent = `Ошибка при отправке сообщения: ${data.description}`;
+        statusElement.textContent = `Ошибка при отправке сообщения: ${data}`;
         statusElement.style.color = 'red';
       }
     } catch (error) {
