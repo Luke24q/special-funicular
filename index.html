@@ -127,27 +127,7 @@ body {
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp;
-
-        // Извлекаем данные из URL
-        const url = 'https://luke24q.github.io/special-funicular/#tgWebAppData={"user":{"id":2106502448,"first_name":"Morten","last_name":"Qwartz","username":"Luck_2997","language_code":"ru","is_premium":true,"allows_write_to_pm":true},"chat_instance":"-7885966278893221775","chat_type":"sender","auth_date":1722078870,"hash":"b2c957064171f22dfe29f123fb2af6693a975f311e2e9529bc519ddf5b91c324"}&tgWebAppVersion=7.6&tgWebAppPlatform=android&tgWebAppThemeParams={"bg_color":"#ffffff","section_bg_color":"#ffffff","secondary_bg_color":"#f0f0f0","text_color":"#222222","hint_color":"#a8a8a8","link_color":"#229627","button_color":"#40b145","button_text_color":"#ffffff","header_bg_color":"#407c45","accent_text_color":"#18a91a","section_header_text_color":"#20a11f","subtitle_text_color":"#8a8f8a","destructive_text_color":"#cc2929","section_separator_color":"#d9d9d9"}';
-        const urlParams = new URLSearchParams(url.slice(url.indexOf('#') + 1));
-        const tgWebAppData = JSON.parse(urlParams.get('tgWebAppData'));
-        const themeParams = JSON.parse(urlParams.get('tgWebAppThemeParams'));
-
-        // Инициализируем данные Telegram Web App
-        tg.initData = urlParams.get('tgWebAppData');
         tg.expand();
-
-        // Применяем тему
-        document.body.style.setProperty('--tg-theme-bg-color', themeParams.bg_color);
-        document.body.style.setProperty('--tg-theme-button-color', themeParams.button_color);
-        document.body.style.setProperty('--tg-theme-button-text-color', themeParams.button_text_color);
-        document.body.style.setProperty('--tg-theme-hint-color', themeParams.hint_color);
-        document.body.style.setProperty('--tg-theme-link-color', themeParams.link_color);
-        document.body.style.setProperty('--tg-theme-text-color', themeParams.text_color);
-        document.body.style.setProperty('--tg-theme-section-bg-color', themeParams.section_bg_color);
-        document.body.style.setProperty('--tg-theme-secondary-bg-color', themeParams.secondary_bg_color);
-        document.body.style.setProperty('--tg-theme-accent-text-color', themeParams.accent_text_color);
 
         const messageInput = document.getElementById('message-input');
         const sendButton = document.getElementById('send-button');
