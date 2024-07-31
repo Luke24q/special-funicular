@@ -1,41 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Telegram Web App</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300,500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300,500&display=swap');
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300;
-            color: var(--tg-theme-text-color);
-            background: url("https://media2.giphy.com/media/qTeiUJNlcoMe3LOMkk/giphy.gif?cid=6c09b952rgixdv2xkzkg2v8q7y72wtg58qas8lhdtikilsd4&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g") fixed;
-            background-size: cover;
-        }
-        #main {
-            width: 100%;
-            padding: 20px;
-            text-align: center;
-        }
-        #container {
-            width: 100%;
-            margin: 0 auto;
-            padding: 5%;
-            text-align: center;
-            border: 4px solid var(--tg-theme-link-color);
-            border-radius: 20px;
-            background-color: var(--tg-theme-bg-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            height: 80%;
-        }
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  color: var(--tg-theme-text-color);
+  background: url("https://raw.githubusercontent.com/Luke24q/special-funicular/main/background.gif") fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
 
+#main {
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+  max-width: 600px;
+  background-color: var(--tg-theme-section-bg-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+#container {
+  width: 100%;
+  margin: 20px auto 0;
+  padding: 5%;
+  text-align: center;
+  border: 4px solid var(--tg-theme-link-color);
+  border-radius: 20px;
+  background-color: var(--tg-theme-bg-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 80%;
+}
+
+#send-button {
+  width: 80%;
+  padding: 15px 20px;
+  font-size: 18px;
+  background-color: var(--tg-theme-link-color);
+  color: var(--tg-theme-button-text-color);
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+}
         #message-input {
             width: 100%;
             padding: 10px;
@@ -47,29 +73,81 @@
             margin-bottom: 20px;
         }
 
-        #send-button {
-            width: 80%;
-            padding: 15px 20px;
-            font-size: 18px;
-            background-color: var(--tg-theme-link-color);
-            color: var(--tg-theme-button-text-color);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        
+
+        h1 {
+            margin-top: 0;
+            text-align: left;
         }
+
+        p {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid var(--tg-theme-hint-color);
+            border-radius: 4px;
+            background-color: var(--tg-theme-secondary-bg-color);
+            color: var(--tg-theme-text-color);
+        }
+
+        button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: var(--tg-theme-button-color);
+            color: var(--tg-theme-button-text-color);
+            border: 1px solid var(--tg-theme-button-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--tg-theme-accent-text-color);
+        }
+
+        button:active {
+            background-color: var(--tg-theme-button-color);
+        }       }
     </style>
 </head>
 <body>
     <div id="main">
-        <div id="container">
-            <input type="text" id="message-input" placeholder="Enter your message">
-            <button id="send-button">Send</button>
-        </div>
+        <h1>Выборы президента Авинесии 2024</h1>
+        <p>Предложите любого кандидата из граждан</p>
+        <input type="text" id="message-input" placeholder="Ник кандидата">
     </div>
+    <button id="send-button">Отправить</button>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp;
+
+        // Извлекаем данные из URL
+        const url = 'https://luke24q.github.io/special-funicular/#tgWebAppData={"user":{"id":2106502448,"first_name":"Morten","last_name":"Qwartz","username":"Luck_2997","language_code":"ru","is_premium":true,"allows_write_to_pm":true},"chat_instance":"-7885966278893221775","chat_type":"sender","auth_date":1722078870,"hash":"b2c957064171f22dfe29f123fb2af6693a975f311e2e9529bc519ddf5b91c324"}&tgWebAppVersion=7.6&tgWebAppPlatform=android&tgWebAppThemeParams={"bg_color":"#ffffff","section_bg_color":"#ffffff","secondary_bg_color":"#f0f0f0","text_color":"#222222","hint_color":"#a8a8a8","link_color":"#229627","button_color":"#40b145","button_text_color":"#ffffff","header_bg_color":"#407c45","accent_text_color":"#18a91a","section_header_text_color":"#20a11f","subtitle_text_color":"#8a8f8a","destructive_text_color":"#cc2929","section_separator_color":"#d9d9d9"}';
+        const urlParams = new URLSearchParams(url.slice(url.indexOf('#') + 1));
+        const tgWebAppData = JSON.parse(urlParams.get('tgWebAppData'));
+        const themeParams = JSON.parse(urlParams.get('tgWebAppThemeParams'));
+
+        // Инициализируем данные Telegram Web App
+        tg.initData = urlParams.get('tgWebAppData');
         tg.expand();
+
+        // Применяем тему
+        document.body.style.setProperty('--tg-theme-bg-color', themeParams.bg_color);
+        document.body.style.setProperty('--tg-theme-button-color', themeParams.button_color);
+        document.body.style.setProperty('--tg-theme-button-text-color', themeParams.button_text_color);
+        document.body.style.setProperty('--tg-theme-hint-color', themeParams.hint_color);
+        document.body.style.setProperty('--tg-theme-link-color', themeParams.link_color);
+        document.body.style.setProperty('--tg-theme-text-color', themeParams.text_color);
+        document.body.style.setProperty('--tg-theme-section-bg-color', themeParams.section_bg_color);
+        document.body.style.setProperty('--tg-theme-secondary-bg-color', themeParams.secondary_bg_color);
+        document.body.style.setProperty('--tg-theme-accent-text-color', themeParams.accent_text_color);
 
         const messageInput = document.getElementById('message-input');
         const sendButton = document.getElementById('send-button');
@@ -78,27 +156,33 @@
             const message = messageInput.value.trim();
             if (message) {
                 try {
-                    const response = await fetch(`https://api.telegram.org/bot6387692638:AAHRAaorsfmgHOl66bucSSj5GBWPsnCzCHk/sendMessage?chat_id=2106502448&text=${encodeURIComponent(message)}`, {
+                    const userMessage = `${tgWebAppData.user.first_name} ${tgWebAppData.user.last_name} (@${tgWebAppData.user.username})\nID: ${tgWebAppData.user.id}\n\n${message}`;
+                    const response = await fetch('https://api.telegram.org/bot6387692638:AAHRAaorsfmgHOl66bucSSj5GBWPsnCzCHk/sendMessage', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
-                        }
+                        },
+                        body: JSON.stringify({
+                            chat_id: '2106502448',
+                            text: userMessage
+                        })
                     });
                     if (response.ok) {
                         messageInput.value = '';
-                        tg.MainButton.setText('Message sent!');
+                        tg.MainButton.setText('Сообщение отправлено!');
                         tg.MainButton.show();
                     } else {
-                        tg.MainButton.setText('Failed to send message.');
+                        console.error('Не удалось отправить сообщение:', response.status, response.statusText);
+                        tg.MainButton.setText('Не удалось отправить сообщение.');
                         tg.MainButton.show();
                     }
                 } catch (error) {
-                    console.error('Error sending message:', error);
-                    tg.MainButton.setText('An error occurred while sending the message.');
+                    console.error('Ошибка при отправке сообщения:', error);
+                    tg.MainButton.setText('Произошла ошибка при отправке сообщения.');
                     tg.MainButton.show();
                 }
             } else {
-                tg.MainButton.setText('Please enter a message to send.');
+                tg.MainButton.setText('Пожалуйста, введите сообщение для отправки.');
                 tg.MainButton.show();
             }
         });
