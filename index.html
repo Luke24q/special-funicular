@@ -141,28 +141,18 @@ body {
                     var xhr = new XMLHttpRequest();
       var message = `${Telegram.WebApp.initDataUnsafe.user.first_name} ${Telegram.WebApp.initDataUnsafe.user.last_name} (@${Telegram.WebApp.initDataUnsafe.user.username})\nID: ${Telegram.WebApp.initDataUnsafe.user.id}\n\nМое сообщение`;
       var url = 'https://api.telegram.org/bot6387692638:AAHRAaorsfmgHOl66bucSSj5GBWPsnCzCHk/sendMessage?chat_id=2106502448&parse_mode=HTML&text=' + encodeURIComponent(message);
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          alert('Сообщение отправлено успешно!');
+        } else {
+          alert('Ошибка при отправке сообщения: ' + xhr.status + ' - ' + xhr.statusText);
+        }
+      };
+
       xhr.open('GET', url, true);
       xhr.send();
     });
-                    if (response.ok) {
-                        messageInput.value = '';
-                        tg.MainButton.setText('Сообщение отправлено!');
-                        tg.MainButton.show();
-                    } else {
-                        console.error('Не удалось отправить сообщение:', response.status, response.statusText);
-                        tg.MainButton.setText('Не удалось отправить сообщение.');
-                        tg.MainButton.show();
-                    }
-                } catch (error) {
-                    console.error('Ошибка при отправке сообщения:', error);
-                    tg.MainButton.setText('Произошла ошибка при отправке сообщения.');
-                    tg.MainButton.show();
-                }
-            } else {
-                tg.MainButton.setText('Пожалуйста, введите сообщение для отправки.');
-                tg.MainButton.show();
-            }
-        });
-    </script>
+  </script>
 </body>
 </html>
