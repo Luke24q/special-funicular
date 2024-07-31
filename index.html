@@ -143,10 +143,15 @@ body {
       var url = 'https://api.telegram.org/bot6387692638:AAHRAaorsfmgHOl66bucSSj5GBWPsnCzCHk/sendMessage?chat_id=2106502448&parse_mode=HTML&text=' + encodeURIComponent(message);
 
       xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-          alert('Сообщение отправлено успешно!');
-        } else {
-          alert('Ошибка при отправке сообщения: ' + xhr.status + ' - ' + xhr.statusText);
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          var statusElement = document.getElementById('messageStatus');
+          if (xhr.status === 200) {
+            statusElement.textContent = 'Сообщение отправлено успешно!';
+            statusElement.style.color = 'green';
+          } else {
+            statusElement.textContent = 'Ошибка при отправке сообщения: ' + xhr.status + ' - ' + xhr.statusText;
+            statusElement.style.color = 'red';
+          }
         }
       };
 
@@ -154,5 +159,6 @@ body {
       xhr.send();
     });
   </script>
+
 </body>
 </html>
